@@ -510,3 +510,26 @@ Feature: Wildfly s2i tests
     Then XML file /opt/wildfly/standalone/configuration/standalone.xml should contain value bar on XPath //*[local-name()='driver']/@name
     Then XML file /opt/wildfly/standalone/configuration/standalone.xml should contain value java:jboss/datasources/${env.FOO} on XPath //*[local-name()='subsystem' and starts-with(namespace-uri(), 'urn:jboss:domain:ee:')]/*[local-name()='default-bindings']/@datasource
     Then container log should contain WFLYSRV0025
+
+ Scenario: Test custom galleon config, failure, invalid feature-pack GAV
+    Given failing s2i build https://github.com/jfdenise/wildfly-s2i from test/test-custom-galleon using CLOUD_3928
+      | variable                                                   | value                                                    |
+      | GALLEON_PROVISION_LAYERS             | jaxrs-server,postgresql-datasource,foo,bar    |
+      | GALLEON_CUSTOM_FEATURE_PACKS_MAVEN_REPO | /tmp/src/my/custom/galleon/repository |
+      | GALLEON_PROVISION_FEATURE_PACKS                      | org.foo:foo-galleon-pack:1.0.0.Final,org.bar:1.0.0.Final |
+
+ Scenario: Test custom galleon config, failure, unknown local maven repo.
+    Given failing s2i build https://github.com/jfdenise/wildfly-s2i from test/test-custom-galleon using CLOUD_3928
+      | variable                                                   | value                                                    |
+      | GALLEON_PROVISION_LAYERS             | jaxrs-server,postgresql-datasource,foo,bar    |
+      | GALLEON_CUSTOM_FEATURE_PACKS_MAVEN_REPO | /tmp/src/foo/repository |
+      | GALLEON_PROVISION_FEATURE_PACKS                      | org.foo:foo-galleon-pack:1.0.0.Final,org.bar:bar-galleon-pack:1.0.0.Final |
+      | FOO                                                         | PostgreSQLDS |
+
+ Scenario: Test custom galleon config failing, unknow GALLEON_DIR
+    Given s2i build https://github.com/jfdenise/wildfly-s2i from test/test-custom-galleon using CLOUD_3928
+      | variable                                                  | value                                                    |
+      | GALLEON_PROVISION_LAYERS            | jaxrs-server,postgresql-datasource,foo,bar    |
+      | GALLEON_DIR                                        | my/custom/galleonXXX |
+      | GALLEON_PROVISION_FEATURE_PACKS                      | org.foo:foo-galleon-pack:1.0.0.Final,org.bar:bar-galleon-pack:1.0.0.Final |
+     
