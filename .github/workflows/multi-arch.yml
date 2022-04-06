@@ -1,0 +1,98 @@
+name: Multi arch test
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    paths-ignore:
+      - 'docs/**'
+env:
+  LANG: en_US.UTF-8
+  S2I_URI: https://api.github.com/repos/openshift/source-to-image/releases/latest
+jobs:
+  wfci:
+    name: Wildfly-s2i Build and Test
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+    steps:
+      - name: Update hosts - linux
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          cat /etc/hosts
+          sudo bash -c "echo '127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4' > /etc/hosts"
+          sudo bash -c "echo '::1         localhost localhost.localdomain localhost6 localhost6.localdomain6' >> /etc/hosts"
+          sudo sysctl -w fs.file-max=2097152
+      - uses: actions/checkout@v2
+#      - name: Enable experimental features
+#        run: |
+#          echo "Checking docker config"
+#          echo '{"experimental": true}' | sudo tee /etc/docker/daemon.json
+#          sudo systemctl restart docker
+#          cat /etc/docker/daemon.json
+#          docker version
+#          docker info
+      - name: Setup podman
+        run: |
+          sudo apt-get update
+          sudo apt-get install podman qemu-user-static
+#      -
+#        name: Set up QEMU
+#        uses: docker/setup-qemu-action@v1
+#      -
+#        name: Set up Docker Buildx
+#        id: buildx
+#        uses: docker/setup-buildx-action@v1
+#        with:
+#          install: true
+#      -
+#        name: Available platforms
+#        run: echo ${{ steps.buildx.outputs.platforms }}
+      - name: Verify latest ubi8-minimal
+        run: |
+          podman pull registry.access.redhat.com/ubi8/ubi-minimal
+          podman image ls | grep ubi8
+      - name: Setup required system packages
+        run: |
+          sudo apt-get install krb5-multidev libkrb5-dev
+      - name: Setup Python 3.x
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - name: Setup virtualenv and install cekit and required packages
+        run: |
+          python --version
+          sudo pip install virtualenv
+          mkdir ~/cekit
+          python3 -m venv ~/cekit
+          . ~/cekit/bin/activate
+          pip install cekit podman odcs behave lxml 
+      - name: Build 
+        run: |
+
+          . ~/cekit/bin/activate
+          pushd wildfly-builder-image
+          cekit -v build podman --platform linux/amd64,linux/arm64
+          #docker build --squash --platform linux/amd64,linux/arm64 --push  -t quay.io/jfdenise/wildfly-s2i-jdk11-multi-arch:latest target/image
+          popd
+          pushd wildfly-runtime-image
+          cekit -v build podman --platform linux/amd64,linux/arm64
+          #docker build --squash --platform linux/amd64,linux/arm64 --push  -t quay.io/jfdenise/wildfly-runtime-jdk11-multi-arch:latest target/image
+          popd
+          podman login -u="jfdenise" -p="${{ secrets.QUAY_PASSWORD }}" quay.io
+          podman tag wildfly/wildfly-runtime-jdk11:latest quay.io/jfdenise/wildfly-runtime-jdk11-multi-arch-podman:latest
+          podman push quay.io/jfdenise/wildfly-runtime-jdk11-multi-arch-podman:latest
+          podman tag wildfly/wildfly-s2i-jdk11:latest quay.io/jfdenise/wildfly-s2i-jdk11-multi-arch-podman:latest
+          podman push quay.io/jfdenise/wildfly-s2i-jdk11-multi-arch-podman:latest
+          podman image ls
+          podman inspect quay.io/jfdenise/wildfly-runtime-jdk11-multi-arch-podman:latest
+          podman inspect quay.io/jfdenise/wildfly-s2i-jdk11-multi-arch-podman:latest
+      - name: Display resources information
+        if: failure()
+        run: |
+            echo === RUNNING CONTAINERS ===
+            podman container ls
+            echo === RUNNING PROCESSES ===
+            top -b -n1
+            echo === DISK USAGE ===
+             df -h
