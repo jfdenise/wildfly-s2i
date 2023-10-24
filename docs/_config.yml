@@ -1,0 +1,4 @@
+title: WildFly S2I images
+# Build settings
+markdown: kramdown
+theme: minima
