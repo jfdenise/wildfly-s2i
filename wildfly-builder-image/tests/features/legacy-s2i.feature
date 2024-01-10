@@ -2,7 +2,7 @@
 Feature: Wildfly Legacy s2i tests
 
   Scenario: Test provisioning.xml file
-    Given s2i build https://github.com/wildfly/wildfly-s2i from test/vanilla-wildfly/test-app-local-provisioning with env and True using main
+    Given s2i build https://github.com/jfdenise/wildfly-s2i from test/vanilla-wildfly/test-app-local-provisioning with env and True using wf-glow-tests
       | variable                             | value         |
       | GALLEON_USE_LOCAL_FILE             | true  |
     Then container log should contain WFLYSRV0025
@@ -113,7 +113,7 @@ Scenario: Test external driver created during s2i.
       | port     | 8080  |
 
   Scenario: Multiple deployments legacy
-   Given s2i build http://github.com/wildfly/wildfly-s2i from test/test-app-multi-deployments-legacy with env and True using main
+   Given s2i build http://github.com/jfdenise/wildfly-s2i from test/test-app-multi-deployments-legacy with env and True using wf-glow-tests
    | variable                 | value           |
    | MAVEN_S2I_ARTIFACT_DIRS | app1/target,app2/target |
    | GALLEON_PROVISION_LAYERS | cloud-server |

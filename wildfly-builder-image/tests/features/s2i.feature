@@ -2,34 +2,34 @@
 Feature: Wildfly s2i tests
 
   Scenario: Build the image with a server
-    Given s2i build https://github.com/wildfly/wildfly-s2i from test/test-app with env and True using main
+    Given s2i build https://github.com/jfdenise/wildfly-s2i from test/test-app with env and True using wf-glow-tests
     | variable                             | value         |
     ### PLACEHOLDER FOR CLOUD CUSTOM TESTING ###
     Then container log should contain WFLYSRV0025
 
   Scenario: Test incremental build, no download of artifacts
-    Given s2i build https://github.com/wildfly/wildfly-s2i from test/test-app with env and True using main
+    Given s2i build https://github.com/jfdenise/wildfly-s2i from test/test-app with env and True using wf-glow-tests
     | variable                             | value         |
     ### PLACEHOLDER FOR CLOUD CUSTOM TESTING ###
     Then container log should contain WFLYSRV0025
     And s2i build log should not contain Downloaded
 
   Scenario: Test extension called at startup.
-    Given s2i build https://github.com/wildfly/wildfly-s2i from test/test-app-extension with env and true using main
+    Given s2i build https://github.com/jfdenise/wildfly-s2i from test/test-app-extension with env and true using wf-glow-tests
     | variable                             | value         |
     ### PLACEHOLDER FOR CLOUD CUSTOM TESTING ###
     Then container log should contain WFLYSRV0025
     Then XML file /opt/server/standalone/configuration/standalone.xml should contain value bar on XPath //*[local-name()='property' and @name="foo"]/@value
 
   Scenario: Test extension called at build time, copy a file inside JBOSS_HOME.
-    Given s2i build https://github.com/wildfly/wildfly-s2i from test/test-app-extension2 with env and true using main
+    Given s2i build https://github.com/jfdenise/wildfly-s2i from test/test-app-extension2 with env and true using wf-glow-tests
     | variable                             | value         |
     ### PLACEHOLDER FOR CLOUD CUSTOM TESTING ###
     Then container log should contain WFLYSRV0025
     Then file /opt/server/modules/org/foo/bar/test.txt should contain hello
 
   Scenario: Test custom settings with galleon
-    Given s2i build https://github.com/wildfly/wildfly-s2i from test/test-app-settings with env and true using main
+    Given s2i build https://github.com/jfdenise/wildfly-s2i from test/test-app-settings with env and true using wf-glow-tests
     | variable                             | value         |
     ### PLACEHOLDER FOR CLOUD CUSTOM TESTING ###
     Then s2i build log should contain /home/jboss/.m2/settings.xml
@@ -37,7 +37,7 @@ Feature: Wildfly s2i tests
     Then container log should contain WFLYSRV0025
 
   Scenario: Test custom settings by env with galleon
-    Given s2i build https://github.com/wildfly/wildfly-s2i from test/test-app with env and true using main
+    Given s2i build https://github.com/jfdenise/wildfly-s2i from test/test-app with env and true using wf-glow-tests
      | variable                     | value                                                 |
      | MAVEN_SETTINGS_XML           | /home/jboss/../jboss/../jboss/.m2/settings.xml |
     ### PLACEHOLDER FOR CLOUD CUSTOM TESTING ###
@@ -45,7 +45,7 @@ Feature: Wildfly s2i tests
     Then container log should contain WFLYSRV0025
 
   Scenario: Test execution of user CLI operations at S2I phase
-    Given s2i build https://github.com/wildfly/wildfly-s2i from test/vanilla-wildfly/test-app-s2i-cli-scripts with env and true using main
+    Given s2i build https://github.com/jfdenise/wildfly-s2i from test/vanilla-wildfly/test-app-s2i-cli-scripts with env and true using wf-glow-tests
      | variable                               | value                                                 |
      | MY_ENVIRONMENT_CONFIGURATION           | my_env_configuration |
     ### PLACEHOLDER FOR CLOUD CUSTOM TESTING ###
@@ -56,7 +56,7 @@ Feature: Wildfly s2i tests
     Then container log should not contain WFLYCTL0056
 
   Scenario: Test jaxrs-server -jpa +jpa-distributed
-    Given s2i build https://github.com/wildfly/wildfly-s2i from test/test-app-jpa2lc with env and True using main
+    Given s2i build https://github.com/jfdenise/wildfly-s2i from test/test-app-jpa2lc with env and True using wf-glow-tests
     | variable                             | value         |
     ### PLACEHOLDER FOR CLOUD CUSTOM TESTING ###
     Then container log should contain WFLYSRV0025
@@ -94,7 +94,7 @@ Feature: Wildfly s2i tests
     Then XML file /opt/server/.galleon/provisioning.xml should contain value jpa on XPath //*[local-name()='installation']/*[local-name()='config']/*[local-name()='layers']/*[local-name()='exclude']/@name
 
   Scenario: Test jaxrs-server +ejb-lite, -ejb-local-cache +ejb-dist-cache. Verify JGroups configuration added by ejb-dist-cache
-    Given s2i build https://github.com/wildfly/wildfly-s2i from test/test-app-ejb with env and True using main
+    Given s2i build https://github.com/jfdenise/wildfly-s2i from test/test-app-ejb with env and True using wf-glow-tests
     | variable                             | value         |
     ### PLACEHOLDER FOR CLOUD CUSTOM TESTING ###
     Then container log should contain WFLYSRV0025
@@ -117,18 +117,18 @@ Feature: Wildfly s2i tests
     Then XML file /opt/server/standalone/configuration/standalone.xml should have 0 elements on XPath //*[local-name()='subsystem' and starts-with(namespace-uri(), 'urn:jboss:domain:jgroups:')]//*[local-name()='stack'][@name='udp']/*[local-name()='protocol' and @type='PING']
 
   Scenario: Test building and running slim application
-    Given s2i build https://github.com/wildfly/wildfly-s2i from test/test-app-slim with env and true using main
+    Given s2i build https://github.com/jfdenise/wildfly-s2i from test/test-app-slim with env and true using wf-glow-tests
     | variable                             | value         |
     ### PLACEHOLDER FOR CLOUD CUSTOM TESTING ###
     Then container log should contain WFLYSRV0025
 
   Scenario: Test failing packaging.
-    Given failing s2i build https://github.com/wildfly/wildfly-s2i from test/test-app-invalid using main
+    Given failing s2i build https://github.com/jfdenise/wildfly-s2i from test/test-app-invalid using main
     | variable                             | value         |
     ### PLACEHOLDER FOR CLOUD CUSTOM TESTING ###
   
   Scenario: Multiple deployments via deployments directory
-   Given s2i build http://github.com/wildfly/wildfly-s2i from test/test-app-multi-deployments with env and True using main
+   Given s2i build http://github.com/jfdenise/wildfly-s2i from test/test-app-multi-deployments with env and True using wf-glow-tests
    | variable                 | value           |
    | MAVEN_S2I_ARTIFACT_DIRS | server/target |
    ### PLACEHOLDER FOR CLOUD CUSTOM TESTING ###
@@ -137,7 +137,7 @@ Feature: Wildfly s2i tests
    Then container log should contain WFLYSRV0025
 
   Scenario: Multiple deployments
-   Given s2i build http://github.com/wildfly/wildfly-s2i from test/test-app-multi-deployments2 with env and True using main
+   Given s2i build http://github.com/jfdenise/wildfly-s2i from test/test-app-multi-deployments2 with env and True using wf-glow-tests
    | variable                 | value           |
    | MAVEN_S2I_ARTIFACT_DIRS | server/target,app1/target,app2/target |
    ### PLACEHOLDER FOR CLOUD CUSTOM TESTING ###
@@ -146,13 +146,13 @@ Feature: Wildfly s2i tests
    Then container log should contain WFLYSRV0025
 
   Scenario: Failing Multiple deployments
-   Given failing s2i build http://github.com/wildfly/wildfly-s2i from test/test-app-multi-deployments-invalid using main
+   Given failing s2i build http://github.com/jfdenise/wildfly-s2i from test/test-app-multi-deployments-invalid using wf-glow-tests
    | variable                 | value           |
    | MAVEN_S2I_ARTIFACT_DIRS | server/target,app1/target,app2/target |
    ### PLACEHOLDER FOR CLOUD CUSTOM TESTING ###
 
   Scenario: Multiple deployments from both MAVEN_S2I_ARTIFACT_DIRS and deployments dir
-   Given s2i build http://github.com/wildfly/wildfly-s2i from test/test-app-multi-deployments3 with env and True using main
+   Given s2i build http://github.com/jfdenise/wildfly-s2i from test/test-app-multi-deployments3 with env and True using wf-glow-tests
    | variable                 | value           |
    | MAVEN_S2I_ARTIFACT_DIRS | server/target,app2/target |
    ### PLACEHOLDER FOR CLOUD CUSTOM TESTING ###

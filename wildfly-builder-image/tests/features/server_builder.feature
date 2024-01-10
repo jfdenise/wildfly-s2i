@@ -2,7 +2,7 @@
 Feature: Wildfly server builder tests
 
   Scenario: Generate a server builder. Check that env variable is set during the build
-   Given s2i build http://github.com/wildfly/wildfly-s2i from test/test-app with env and True using main
+   Given s2i build http://github.com/jfdenise/wildfly-s2i from test/test-app with env and True using wf-glow-tests
    | variable                 | value           |
    | WILDFLY_S2I_GENERATE_SERVER_BUILDER | true |
    | MAVEN_ARGS_APPEND_WILDFLY_SERVER_BUILDER | -Dfoo=bar -Dfoo2=bar2 |
@@ -13,7 +13,7 @@ Feature: Wildfly server builder tests
    Then container log should contain WFLYSRV0025
 
   Scenario: Generate a server builder. Check that maven cache is not deleted
-   Given s2i build http://github.com/wildfly/wildfly-s2i from test/test-app with env and True using main
+   Given s2i build http://github.com/jfdenise/wildfly-s2i from test/test-app with env and True using wf-glow-tests
    | variable                 | value           |
    | WILDFLY_S2I_GENERATE_SERVER_BUILDER | true |
    | S2I_ENABLE_INCREMENTAL_BUILDS_WILDFLY_SERVER_BUILDER | true |
