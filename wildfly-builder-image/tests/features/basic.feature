@@ -22,7 +22,7 @@ Feature: Wildfly basic tests
       | port     | 8080  |
 
   Scenario: Check if image version and release is printed on boot
-   Given s2i build http://github.com/jfdenise/wildfly-s2i from test/test-app with env and True using wf-glow-tests
+   Given s2i build http://github.com/jfdenise/wildfly-s2i from test/test-app with env and True using wf-glow-test-apps
    | variable                 | value           |
    ### PLACEHOLDER FOR CLOUD CUSTOM TESTING ###
    Then container log should contain Running wildfly/wildfly-s2i

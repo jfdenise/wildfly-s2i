@@ -2,7 +2,7 @@
 Feature: Openshift WildFly jgroups
 
   Scenario: Build server image
-    Given s2i build http://github.com/jfdenise/wildfly-s2i from test/test-app-clustering with env and true using wf-glow-tests
+    Given s2i build http://github.com/jfdenise/wildfly-s2i from test/test-app-clustering with env and true using wf-glow-test-apps
     | variable                             | value         |
     ### PLACEHOLDER FOR CLOUD CUSTOM TESTING ###
     Then container log should contain WFLYSRV0025:

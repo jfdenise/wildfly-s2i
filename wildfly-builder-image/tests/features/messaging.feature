@@ -56,7 +56,7 @@ Scenario: Configure amq7 remote broker
    Then container log should contain WFLYSRV0025
 
  Scenario: deploys the test-app-mdb app, then checks if it's deployed properly with Queues and Topics added
-    Given s2i build https://github.com/jfdenise/wildfly-s2i from test/test-app-mdb using wf-glow-tests
+    Given s2i build https://github.com/jfdenise/wildfly-s2i from test/test-app-mdb using wf-glow-test-apps
     | variable              | value                                   |
     |  MQ_TOPICS       |  HELLOWORLDMDBTopic   |
     | MQ_QUEUES      | HELLOWORLDMDBQueue |
