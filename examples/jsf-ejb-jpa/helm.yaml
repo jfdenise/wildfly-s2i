@@ -1,6 +1,7 @@
 build:
-  uri: https://github.com/wildfly/wildfly-s2i
+  uri: https://github.com/jfdenise/wildfly-s2i
   mode: s2i
+  ref: test-bootable-jar
   contextDir: examples/jsf-ejb-jpa
 deploy:
   replicas: 1

@@ -42,6 +42,7 @@
                         <version>${version.wildfly}</version>
                         <context>cloud</context>
                     </discover-provisioning-info>
+                    <bootableJar>true</bootableJar>
                     <galleon-options>
                         <jboss-fork-embedded>true</jboss-fork-embedded>
                     </galleon-options>
