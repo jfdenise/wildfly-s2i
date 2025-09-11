@@ -1,5 +1,9 @@
 name: CI run nightly for future ubi10 image.
 on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    paths-ignore:
+      - 'docs/**'
   schedule:
     - cron: '0 2 * * *' # Every day at 00:00 UTC
 env:
