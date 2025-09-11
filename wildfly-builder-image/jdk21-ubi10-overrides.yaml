@@ -18,6 +18,10 @@ modules:
             git:
               url: https://github.com/rh-openjdk/redhat-openjdk-containers
               ref: ubi10
+          - name: wildfly-cekit-modules
+            git:
+              url: https://github.com/jfdenise/wildfly-cekit-modules
+              ref: ubi10
       install:
           - name: jboss.container.openjdk.jdk
             version: "21"
