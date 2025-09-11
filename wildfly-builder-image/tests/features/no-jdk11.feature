@@ -12,3 +12,4 @@ Feature: Wildfly Legacy s2i tests that can't run on JDK11
       | property | value |
       | path     | /     |
       | port     | 8080  |
+      | timeout  | 10.0  |

@@ -74,4 +74,5 @@ Scenario: Configure amq7 remote broker
       | property | value |
       | path     | /HelloWorldMDBServletClient     |
       | port     | 8080  |
+      | timeout  | 10.0  |
    Then container log should contain Received Message from queue: This is message 1

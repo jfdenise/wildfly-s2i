@@ -64,31 +64,37 @@ Feature: Wildfly s2i tests
       | property              | value                                   |
       | path                  | /                        |
       | port                  | 8080                                    |
+      | timeout               | 10.0                                    |
     Then check that page is served
       | property              | value                                   |
       | path                  | /create/1               |
       | port                  | 8080                                    |
       | expected_phrase       | 1 created                               |
+      | timeout               | 10.0                                    |
     Then check that page is served
       | property              | value                                   |
       | path                  | /isInCache/1            |
       | port                  | 8080                                    |
       | expected_phrase       | true                                    |
+      | timeout               | 10.0                                    |
     Then check that page is served
       | property              | value                                   |
       | path                  | /cache/1                |
       | port                  | 8080                                    |
       | expected_phrase       | 1                                       |
+      | timeout               | 10.0                                    |
     Then check that page is served
       | property              | value                                   |
       | path                  | /evict/1                |
       | port                  | 8080                                    |
       | expected_phrase       | 1 evict                                 |
+      | timeout               | 10.0                                    |
     Then check that page is served
       | property              | value                                   |
       | path                  | /isInCache/1            |
       | port                  | 8080                                    |
       | expected_phrase       | false                                   |
+      | timeout               | 10.0                                    |
     Then XML file /opt/server/.galleon/provisioning.xml should contain value jaxrs-server on XPath //*[local-name()='installation']/*[local-name()='config']/*[local-name()='layers']/*[local-name()='include']/@name
     Then XML file /opt/server/.galleon/provisioning.xml should contain value jpa-distributed on XPath //*[local-name()='installation']/*[local-name()='config']/*[local-name()='layers']/*[local-name()='include']/@name
     Then XML file /opt/server/.galleon/provisioning.xml should contain value jpa on XPath //*[local-name()='installation']/*[local-name()='config']/*[local-name()='layers']/*[local-name()='exclude']/@name
@@ -102,11 +108,13 @@ Feature: Wildfly s2i tests
       | property              | value                                   |
       | path                  | /                           |
       | port                  | 8080                                    |
+      | timeout               | 10.0                                    |
     Then check that page is served
       | property              | value                                   |
       | path                  | /messages/hello            |
       | port                  | 8080                                    |
       | expected_phrase       | sfsb_hello                              |
+      | timeout               | 10.0                                    |
     Then XML file /opt/server/.galleon/provisioning.xml should contain value jaxrs-server on XPath //*[local-name()='installation']/*[local-name()='config']/*[local-name()='layers']/*[local-name()='include']/@name
     Then XML file /opt/server/.galleon/provisioning.xml should contain value ejb-dist-cache on XPath //*[local-name()='installation']/*[local-name()='config']/*[local-name()='layers']/*[local-name()='include']/@name
     Then XML file /opt/server/.galleon/provisioning.xml should contain value ejb-local-cache on XPath //*[local-name()='installation']/*[local-name()='config']/*[local-name()='layers']/*[local-name()='exclude']/@name

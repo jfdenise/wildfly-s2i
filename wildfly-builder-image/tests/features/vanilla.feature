@@ -16,6 +16,7 @@ Scenario:  Test basic deployment vanilla WildFly
       | property | value |
       | path     | /     |
       | port     | 8080  |
+      | timeout  | 10.0  |
 
 Scenario: Zero port offset in galleon provisioned configuration with vanilla wildfly
     When container integ- is started with env
@@ -203,6 +204,7 @@ Scenario:  Test CLI script execution at runtime
       | property | value |
       | path     | /     |
       | port     | 8080  |
+      | timeout  | 10.0  |
 
 Scenario:  Test CLI script execution at runtime
     When container integ- is started with env
@@ -219,6 +221,7 @@ Scenario:  Test CLI script execution at runtime
       | property | value |
       | path     | /     |
       | port     | 8080  |
+      | timeout  | 10.0  |
 
 Scenario:  Test CLI script execution at runtime, custom output file
     When container integ- is started with env
@@ -235,6 +238,7 @@ Scenario:  Test CLI script execution at runtime, custom output file
       | property | value |
       | path     | /     |
       | port     | 8080  |
+      | timeout  | 10.0  |
 
 Scenario:  Test CLI script execution at runtime, absolute file and console output
     When container integ- is started with command bash
@@ -252,6 +256,7 @@ Scenario:  Test CLI script execution at runtime, absolute file and console outpu
       | property | value |
       | path     | /     |
       | port     | 8080  |
+      | timeout  | 10.0  |
 
 Scenario:  Test CLI script execution at runtime, failure
     When container integ- is started with command bash

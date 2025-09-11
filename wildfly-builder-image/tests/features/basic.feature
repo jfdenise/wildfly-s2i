@@ -38,6 +38,7 @@ Feature: Wildfly basic tests
       | property | value |
       | path     | /     |
       | port     | 8080  |
+      | timeout  | 10.0  |
 
   Scenario: Add admin user to standard configuration, galleon s2i
     When container integ- is started with env
@@ -176,6 +177,7 @@ Scenario:  Test execution of builder image and addition of json logging
       | property | value |
       | path     | /     |
       | port     | 8080  |
+      | timeout  | 10.0  |
 
   Scenario: Test fallback to CLI process launched for configuration
     When container integ- is started with env
@@ -191,6 +193,7 @@ Scenario:  Test execution of builder image and addition of json logging
       | property | value |
       | path     | /     |
       | port     | 8080  |
+      | timeout  | 10.0  |
 
 
   #JSON logging should have no effect on the configuration, server should start properly
@@ -205,6 +208,7 @@ Scenario:  Test execution of builder image and addition of json logging
       | property | value |
       | path     | /     |
       | port     | 8080  |
+      | timeout  | 10.0  |
     Then XML file /opt/server/.galleon/provisioning.xml should contain value cloud-server on XPath //*[local-name()='installation']/*[local-name()='config']/*[local-name()='layers']/*[local-name()='include']/@name
 
 Scenario: CLOUD-2877, RHDM-520, RHPAM-1434, test default filter ref name, galleon
@@ -303,6 +307,7 @@ Scenario: Test resource adapter extension, galleon s2i
       | property | value |
       | path     | /     |
       | port     | 8080  |
+      | timeout  | 10.0  |
 
   Scenario:  Test CLI script execution at runtime, custom output file
     When container integ- is started with command bash
@@ -319,6 +324,7 @@ Scenario: Test resource adapter extension, galleon s2i
       | property | value |
       | path     | /     |
       | port     | 8080  |
+      | timeout  | 10.0  |
 
   Scenario:  Test CLI script execution at runtime, absolute file and console output
     When container integ- is started with command bash
@@ -336,6 +342,7 @@ Scenario: Test resource adapter extension, galleon s2i
       | property | value |
       | path     | /     |
       | port     | 8080  |
+      | timeout  | 10.0  |
 
   Scenario:  Test CLI script execution at runtime, failure
     When container integ- is started with command bash
@@ -454,6 +461,7 @@ Scenario: Test resource adapter extension, galleon s2i
       | property | value |
       | path     | /     |
       | port     | 8080  |
+      | timeout  | 10.0  |
 
   Scenario:  Test ENV_FILES used to set access_log
     When container integ- is started with command bash
@@ -469,6 +477,7 @@ Scenario: Test resource adapter extension, galleon s2i
       | property | value |
       | path     | /     |
       | port     | 8080  |
+      | timeout  | 10.0  |
 
   Scenario: Add admin user to standard configuration with ENV_FILES
     When container integ- is started with command bash
@@ -484,6 +493,7 @@ Scenario: Test resource adapter extension, galleon s2i
       | property | value |
       | path     | /     |
       | port     | 8080  |
+      | timeout  | 10.0  |
 
   Scenario: Set exploded deployment with ENV_FILES
     When container integ- is started with command bash
@@ -497,6 +507,7 @@ Scenario: Test resource adapter extension, galleon s2i
       | property | value |
       | path     | /     |
       | port     | 8080  |
+      | timeout  | 10.0  |
 
   Scenario: Set json logging with ENV_FILES
     When container integ- is started with command bash
@@ -512,6 +523,7 @@ Scenario: Test resource adapter extension, galleon s2i
       | property | value |
       | path     | /     |
       | port     | 8080  |
+      | timeout  | 10.0  |
 
   Scenario: Set mp-config with ENV_FILES
     When container integ- is started with command bash
@@ -526,6 +538,7 @@ Scenario: Test resource adapter extension, galleon s2i
       | property | value |
       | path     | /     |
       | port     | 8080  |
+      | timeout  | 10.0  |
 
   Scenario: Set messaging with ENV_FILES
     When container integ- is started with command bash
@@ -578,6 +591,7 @@ Scenario: Test resource adapter extension, galleon s2i
       | property | value |
       | path     | /     |
       | port     | 8080  |
+      | timeout  | 10.0  |
 
   Scenario: Check that system properties are set by default
     When container integ- is started with env

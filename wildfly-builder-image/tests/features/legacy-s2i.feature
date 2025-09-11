@@ -10,6 +10,7 @@ Feature: Wildfly Legacy s2i tests
       | property | value |
       | path     | /     |
       | port     | 8080  |
+      | timeout  | 10.0  |
 
 Scenario: Test preconfigure.sh
     Given s2i build https://github.com/wildfly/wildfly-s2i from test/test-app-advanced-extensions with env and True using legacy-s2i-images
@@ -23,6 +24,7 @@ Scenario: Test preconfigure.sh
       | property | value |
       | path     | /     |
       | port     | 8080  |
+      | timeout  | 10.0  |
     Then XML file /opt/server/standalone/configuration/standalone.xml should contain value foo on XPath //*[local-name()='property' and @name="foo"]/@value
     Then XML file /opt/wildfly/standalone/configuration/standalone.xml should contain value foo on XPath //*[local-name()='property' and @name="foo"]/@value
 
@@ -44,6 +46,7 @@ Scenario: Test preconfigure.sh
       | property | value |
       | path     | /     |
       | port     | 8080  |
+      | timeout  | 10.0  |
 
   Scenario: Test cloud-server, exclude jaxrs
     Given s2i build https://github.com/wildfly/wildfly-s2i from test/test-app with env and True using legacy-s2i-images
@@ -55,6 +58,7 @@ Scenario: Test preconfigure.sh
       | property | value |
       | path     | /     |
       | port     | 8080  |
+      | timeout  | 10.0  |
     Then XML file /opt/server/.galleon/provisioning.xml should contain value cloud-server on XPath //*[local-name()='installation']/*[local-name()='config']/*[local-name()='layers']/*[local-name()='include']/@name
     Then XML file /opt/server/.galleon/provisioning.xml should contain value jaxrs on XPath //*[local-name()='installation']/*[local-name()='config']/*[local-name()='layers']/*[local-name()='exclude']/@name
 
@@ -69,6 +73,7 @@ Scenario: Test external driver created during s2i.
       | property | value |
       | path     | /     |
       | port     | 8080  |
+      | timeout  | 10.0  |
     Then XML file /opt/server/standalone/configuration/standalone.xml should contain value test-TEST on XPath //*[local-name()='datasource']/@pool-name
     Then XML file /opt/server/standalone/configuration/standalone.xml should contain value testpostgres on XPath //*[local-name()='driver']/@name
 
@@ -85,6 +90,7 @@ Scenario: Test external driver created during s2i.
       | property | value |
       | path     | /     |
       | port     | 8080  |
+      | timeout  | 10.0  |
     Then XML file /opt/server/standalone/configuration/standalone.xml should contain value test-TEST on XPath //*[local-name()='datasource']/@pool-name
     Then XML file /opt/server/standalone/configuration/standalone.xml should contain value testpostgres on XPath //*[local-name()='driver']/@name
 
@@ -99,6 +105,7 @@ Scenario: Test external driver created during s2i.
       | property | value |
       | path     | /app     |
       | port     | 8080  |
+      | timeout  | 10.0  |
 
   Scenario: Multiple deployments legacy
    Given s2i build http://github.com/wildfly/wildfly-s2i from test/test-app-multi-deployments-legacy with env and True using main

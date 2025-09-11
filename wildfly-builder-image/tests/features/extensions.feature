@@ -17,6 +17,7 @@ Feature: Wildfly extensions tests
       | property | value |
       | path     | /     |
       | port     | 8080  |
+      | timeout  | 10.0  |
     Then XML file /opt/server/standalone/configuration/standalone.xml should contain value foo on XPath //*[local-name()='property' and @name="foo"]/@value
 
    Scenario: Test preconfigure.sh fallback CLI
@@ -31,6 +32,7 @@ Feature: Wildfly extensions tests
       | property | value |
       | path     | /     |
       | port     | 8080  |
+      | timeout  | 10.0  |
     Then XML file /opt/server/standalone/configuration/standalone.xml should contain value foo on XPath //*[local-name()='property' and @name="foo"]/@value
 
    Scenario: Test preconfigure.sh calls CLI
@@ -43,6 +45,7 @@ Feature: Wildfly extensions tests
       | property | value |
       | path     | /     |
       | port     | 8080  |
+      | timeout  | 10.0  |
     Then XML file /opt/server/standalone/configuration/standalone.xml should contain value bar on XPath //*[local-name()='property' and @name="foo"]/@value
 
    Scenario: Test preconfigure.sh calls CLI
@@ -57,6 +60,7 @@ Feature: Wildfly extensions tests
       | property | value |
       | path     | /     |
       | port     | 8080  |
+      | timeout  | 10.0  |
     Then XML file /opt/server/standalone/configuration/standalone.xml should contain value bar on XPath //*[local-name()='property' and @name="foo"]/@value
 
   Scenario: Test preconfigure.sh fails in bash
@@ -112,6 +116,7 @@ Feature: Wildfly extensions tests
       | property | value |
       | path     | /     |
       | port     | 8080  |
+      | timeout  | 10.0  |
 
   Scenario: Test postconfigure.sh
     When container integ- is started with env
@@ -123,6 +128,7 @@ Feature: Wildfly extensions tests
       | property | value |
       | path     | /     |
       | port     | 8080  |
+      | timeout  | 10.0  |
     Then XML file /opt/server/standalone/configuration/standalone.xml should contain value foo on XPath //*[local-name()='property' and @name="foo"]/@value
 
   Scenario: Test postconfigure.sh
@@ -137,6 +143,7 @@ Feature: Wildfly extensions tests
       | property | value |
       | path     | /     |
       | port     | 8080  |
+      | timeout  | 10.0  |
     Then XML file /opt/server/standalone/configuration/standalone.xml should contain value foo on XPath //*[local-name()='property' and @name="foo"]/@value
 
   Scenario: Test postconfigure.sh calls CLI
@@ -150,6 +157,7 @@ Feature: Wildfly extensions tests
       | property | value |
       | path     | /     |
       | port     | 8080  |
+      | timeout  | 10.0  |
     Then XML file /opt/server/standalone/configuration/standalone.xml should contain value bar on XPath //*[local-name()='property' and @name="foo"]/@value
     Then XML file /opt/server/standalone/configuration/standalone.xml should contain value bar2 on XPath //*[local-name()='property' and @name="foo2"]/@value
 
@@ -165,6 +173,7 @@ Feature: Wildfly extensions tests
       | property | value |
       | path     | /     |
       | port     | 8080  |
+      | timeout  | 10.0  |
     Then XML file /opt/server/standalone/configuration/standalone.xml should contain value bar2 on XPath //*[local-name()='property' and @name="foo2"]/@value
 
   Scenario: Test postconfigure.sh fails in bash
@@ -222,3 +231,4 @@ Feature: Wildfly extensions tests
       | property | value |
       | path     | /     |
       | port     | 8080  |
+      | timeout  | 10.0  |

@@ -28,6 +28,7 @@ Feature: Wildfly configured for datasources
       | property | value |
       | path     | /     |
       | port     | 8080  |
+      | timeout  | 10.0  |
 
   Scenario: Test dirver added during provisioning.
      When container integ- is started with env
@@ -40,6 +41,7 @@ Feature: Wildfly configured for datasources
       | property | value |
       | path     | /     |
       | port     | 8080  |
+      | timeout  | 10.0  |
     Then XML file /opt/server/standalone/configuration/standalone.xml should contain value test-TEST on XPath //*[local-name()='datasource']/@pool-name
     Then XML file /opt/server/standalone/configuration/standalone.xml should contain value postgresql on XPath //*[local-name()='driver']/@name
 
@@ -56,5 +58,6 @@ Feature: Wildfly configured for datasources
       | property | value |
       | path     | /     |
       | port     | 8080  |
+      | timeout  | 10.0  |
     Then XML file /opt/server/standalone/configuration/standalone.xml should contain value test-TEST on XPath //*[local-name()='datasource']/@pool-name
     Then XML file /opt/server/standalone/configuration/standalone.xml should contain value postgresql on XPath //*[local-name()='driver']/@name

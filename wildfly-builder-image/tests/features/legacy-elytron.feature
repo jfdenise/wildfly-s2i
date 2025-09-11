@@ -21,6 +21,7 @@ Scenario: Build elytron app
       | expected_status_code       | 401         |
       | path                       | /test       |
       | port                       | 8080        |
+      | timeout                    | 10.0        |
 
   Scenario: check Elytron configuration with elytron core realms security domain success
     When container integ- is started with command bash
@@ -37,6 +38,7 @@ Scenario: Build elytron app
       | port                       | 8080        |
       | username | wildfly |
       | password | pass |
+      | timeout  | 10.0  |
 
  Scenario: check Elytron configuration with elytron custom security domain fail
     When container integ- is started with command bash
@@ -54,6 +56,7 @@ Scenario: Build elytron app
       | expected_status_code       | 401         |
       | path                       | /test       |
       | port                       | 8080        |
+      | timeout                    | 10.0        |
     And XML file /opt/server/standalone/configuration/standalone.xml should contain value my-security-domain on XPath //*[local-name()='subsystem' and starts-with(namespace-uri(), 'urn:jboss:domain:undertow:')]/*[local-name()='application-security-domains']/*[local-name()='application-security-domain']/@name
     And XML file /opt/server/standalone/configuration/standalone.xml should contain value my-security-domain on XPath //*[local-name()='subsystem' and starts-with(namespace-uri(), 'urn:jboss:domain:undertow:')]/*[local-name()='application-security-domains']/*[local-name()='application-security-domain']/@security-domain
 
@@ -74,3 +77,4 @@ Scenario: Build elytron app
       | port                       | 8080        |
       | username | wildfly |
       | password | pass |
+      | timeout  | 10.0  |
