@@ -20,6 +20,7 @@ Feature: Wildfly basic tests
       | property | value |
       | path     | /     |
       | port     | 8080  |
+      | timeout  | 10.0  |
 
   Scenario: Check if image version and release is printed on boot
    Given s2i build http://github.com/wildfly/wildfly-s2i from test/test-app with env and True using main
