@@ -131,6 +131,9 @@ jobs:
           cloudVersion=8.0.1.Alpha1
           mkdir -p $tmpPath/docker/maven-repository/org/wildfly/cloud/wildfly-cloud-galleon-pack/$cloudVersion
           cp wildfly-cloud-galleon-pack/target/wildfly-cloud-galleon-pack-$cloudVersion.zip $tmpPath/docker/maven-repository/org/wildfly/cloud/wildfly-cloud-galleon-pack/$cloudVersion
+          mkdir -p $tmpPath/docker/maven-repository/org/wildfly/cloud/wildfly-preview-cloud-galleon-pack/$cloudVersion
+          cp wildfly-preview-cloud-galleon-pack/target/wildfly-preview-cloud-galleon-pack-$cloudVersion.zip $tmpPath/docker/maven-repository/org/wildfly/cloud/wildfly-preview-cloud-galleon-pack/$cloudVersion
+          
           cat <<EOF > $docker_file
           FROM ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:${{ env.WILDFLY_IMAGE_VERSION }}
           RUN mkdir -p /tmp/artifacts/m2
