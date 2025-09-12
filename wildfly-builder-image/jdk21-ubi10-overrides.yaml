@@ -28,4 +28,4 @@ modules:
           - name: jboss.container.maven
             version: "3.9.21"
           - name: jboss.container.wildfly.custom.settings
-            version: "staging"
+            version: "local"
