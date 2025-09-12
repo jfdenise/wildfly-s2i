@@ -1,6 +1,6 @@
 schema_version: 1
 name: jboss.container.wildfly.custom.settings
-version: 'staging'
+version: 'local'
 description: Custom settings
 
 execute:
