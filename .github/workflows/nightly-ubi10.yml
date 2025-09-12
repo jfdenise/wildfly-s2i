@@ -127,7 +127,6 @@ jobs:
           mkdir -p $tmpPath
           mkdir -p $tmpPath/docker/
           docker_file=$tmpPath/docker/Dockerfile
-          cd wildfly-cloud-galleon-pack
           mvn clean install -DskipTests
           cloudVersion=8.0.1.Alpha1
           mkdir -p $tmpPath/docker/maven-repository/org/wildfly/cloud/wildfly-cloud-galleon-pack/$cloudVersion
