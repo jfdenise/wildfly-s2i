@@ -156,7 +156,7 @@ jobs:
         run: |
           . ~/cekit/bin/activate
           pushd wildfly-builder-image
-          cekit test --image=${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:${{ env.WILDFLY_IMAGE_VERSION }} behave --include-re datasources > test-logs-datasources-${{ matrix.os }}-${{ matrix.jdk }}.txt 2>&1
+          cekit test --image=${{ env.WILDFLY_S2I_BUILDER_IMAGE }}-custom:${{ env.WILDFLY_IMAGE_VERSION }} behave --include-re datasources > test-logs-datasources-${{ matrix.os }}-${{ matrix.jdk }}.txt 2>&1
           rm test-logs-datasources-${{ matrix.os }}-${{ matrix.jdk }}.txt
           popd
           docker system prune -f
@@ -164,7 +164,7 @@ jobs:
         run: |
           . ~/cekit/bin/activate
           pushd wildfly-builder-image
-          cekit test --image=${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:${{ env.WILDFLY_IMAGE_VERSION }} behave --include-re extensions > test-logs-extensions-${{ matrix.os }}-${{ matrix.jdk }}.txt 2>&1
+          cekit test --image=${{ env.WILDFLY_S2I_BUILDER_IMAGE }}-custom:${{ env.WILDFLY_IMAGE_VERSION }} behave --include-re extensions > test-logs-extensions-${{ matrix.os }}-${{ matrix.jdk }}.txt 2>&1
           rm test-logs-extensions-${{ matrix.os }}-${{ matrix.jdk }}.txt
           popd
           docker system prune -f
@@ -172,7 +172,7 @@ jobs:
         run: |
           . ~/cekit/bin/activate
           pushd wildfly-builder-image
-          cekit test --image=${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:${{ env.WILDFLY_IMAGE_VERSION }} behave --include-re jgroups > test-logs-jgroups-${{ matrix.os }}-${{ matrix.jdk }}.txt 2>&1
+          cekit test --image=${{ env.WILDFLY_S2I_BUILDER_IMAGE }}-custom:${{ env.WILDFLY_IMAGE_VERSION }} behave --include-re jgroups > test-logs-jgroups-${{ matrix.os }}-${{ matrix.jdk }}.txt 2>&1
           rm test-logs-jgroups-${{ matrix.os }}-${{ matrix.jdk }}.txt
           popd
           docker system prune -f
@@ -180,7 +180,7 @@ jobs:
         run: |
           . ~/cekit/bin/activate
           pushd wildfly-builder-image
-          cekit test --image=${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:${{ env.WILDFLY_IMAGE_VERSION }} behave --include-re keycloak > test-logs-keycloak-${{ matrix.os }}-${{ matrix.jdk }}.txt 2>&1
+          cekit test --image=${{ env.WILDFLY_S2I_BUILDER_IMAGE }}-custom:${{ env.WILDFLY_IMAGE_VERSION }} behave --include-re keycloak > test-logs-keycloak-${{ matrix.os }}-${{ matrix.jdk }}.txt 2>&1
           rm test-logs-keycloak-${{ matrix.os }}-${{ matrix.jdk }}.txt
           popd
           docker system prune -f
@@ -188,7 +188,7 @@ jobs:
         run: |
           . ~/cekit/bin/activate
           pushd wildfly-builder-image
-          cekit test --image=${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:${{ env.WILDFLY_IMAGE_VERSION }} behave --include-re legacy-elytron > test-logs-legacy-elytron-${{ matrix.os }}-${{ matrix.jdk }}.txt 2>&1
+          cekit test --image=${{ env.WILDFLY_S2I_BUILDER_IMAGE }}-custom:${{ env.WILDFLY_IMAGE_VERSION }} behave --include-re legacy-elytron > test-logs-legacy-elytron-${{ matrix.os }}-${{ matrix.jdk }}.txt 2>&1
           rm test-logs-legacy-elytron-${{ matrix.os }}-${{ matrix.jdk }}.txt
           popd
           docker system prune -f
@@ -196,7 +196,7 @@ jobs:
         run: |
           . ~/cekit/bin/activate
           pushd wildfly-builder-image
-          cekit test --image=${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:${{ env.WILDFLY_IMAGE_VERSION }} behave --include-re legacy-s2i > test-logs-legacy-s2i-${{ matrix.os }}-${{ matrix.jdk }}.txt 2>&1
+          cekit test --image=${{ env.WILDFLY_S2I_BUILDER_IMAGE }}-custom:${{ env.WILDFLY_IMAGE_VERSION }} behave --include-re legacy-s2i > test-logs-legacy-s2i-${{ matrix.os }}-${{ matrix.jdk }}.txt 2>&1
           rm test-logs-legacy-s2i-${{ matrix.os }}-${{ matrix.jdk }}.txt
           popd
           docker system prune -f
@@ -204,7 +204,7 @@ jobs:
         run: |
           . ~/cekit/bin/activate
           pushd wildfly-builder-image
-          cekit test --image=${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:${{ env.WILDFLY_IMAGE_VERSION }} behave --include-re messaging > test-logs-messaging-${{ matrix.os }}-${{ matrix.jdk }}.txt 2>&1
+          cekit test --image=${{ env.WILDFLY_S2I_BUILDER_IMAGE }}-custom:${{ env.WILDFLY_IMAGE_VERSION }} behave --include-re messaging > test-logs-messaging-${{ matrix.os }}-${{ matrix.jdk }}.txt 2>&1
           rm test-logs-messaging-${{ matrix.os }}-${{ matrix.jdk }}.txt
           popd
           docker system prune -f
@@ -213,7 +213,7 @@ jobs:
         run: |
           . ~/cekit/bin/activate
           pushd wildfly-builder-image
-          cekit test --image=${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:${{ env.WILDFLY_IMAGE_VERSION }} behave --include-re no-jdk11 > test-logs-no-jdk11-${{ matrix.os }}-${{ matrix.jdk }}.txt 2>&1
+          cekit test --image=${{ env.WILDFLY_S2I_BUILDER_IMAGE }}-custom:${{ env.WILDFLY_IMAGE_VERSION }} behave --include-re no-jdk11 > test-logs-no-jdk11-${{ matrix.os }}-${{ matrix.jdk }}.txt 2>&1
           rm test-logs-no-jdk11-${{ matrix.os }}-${{ matrix.jdk }}.txt
           popd
           docker system prune -f
@@ -221,7 +221,7 @@ jobs:
         run: |
           . ~/cekit/bin/activate
           pushd wildfly-builder-image
-          cekit test --image=${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:${{ env.WILDFLY_IMAGE_VERSION }} behave --include-re oidc > test-logs-oidc-${{ matrix.os }}-${{ matrix.jdk }}.txt 2>&1
+          cekit test --image=${{ env.WILDFLY_S2I_BUILDER_IMAGE }}-custom:${{ env.WILDFLY_IMAGE_VERSION }} behave --include-re oidc > test-logs-oidc-${{ matrix.os }}-${{ matrix.jdk }}.txt 2>&1
           rm test-logs-oidc-${{ matrix.os }}-${{ matrix.jdk }}.txt
           popd
           docker system prune -f
@@ -229,7 +229,7 @@ jobs:
         run: |
           . ~/cekit/bin/activate
           pushd wildfly-builder-image
-          cekit test --image=${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:${{ env.WILDFLY_IMAGE_VERSION }} behave --include-re s2i-tests > test-logs-s2i-tests-${{ matrix.os }}-${{ matrix.jdk }}.txt 2>&1
+          cekit test --image=${{ env.WILDFLY_S2I_BUILDER_IMAGE }}-custom:${{ env.WILDFLY_IMAGE_VERSION }} behave --include-re s2i-tests > test-logs-s2i-tests-${{ matrix.os }}-${{ matrix.jdk }}.txt 2>&1
           rm test-logs-s2i-tests-${{ matrix.os }}-${{ matrix.jdk }}.txt
           popd
           docker system prune -f  
@@ -237,7 +237,7 @@ jobs:
         run: |
           . ~/cekit/bin/activate
           pushd wildfly-builder-image
-          cekit test --image=${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:${{ env.WILDFLY_IMAGE_VERSION }} behave --include-re server_builder > test-logs-server_builder-${{ matrix.os }}-${{ matrix.jdk }}.txt 2>&1
+          cekit test --image=${{ env.WILDFLY_S2I_BUILDER_IMAGE }}-custom:${{ env.WILDFLY_IMAGE_VERSION }} behave --include-re server_builder > test-logs-server_builder-${{ matrix.os }}-${{ matrix.jdk }}.txt 2>&1
           rm test-logs-server_builder-${{ matrix.os }}-${{ matrix.jdk }}.txt
           popd
           docker system prune -f  
@@ -245,7 +245,7 @@ jobs:
         run: |
           . ~/cekit/bin/activate
           pushd wildfly-builder-image
-          cekit test --image=${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:${{ env.WILDFLY_IMAGE_VERSION }} behave --include-re stability > test-logs-stability-${{ matrix.os }}-${{ matrix.jdk }}.txt 2>&1
+          cekit test --image=${{ env.WILDFLY_S2I_BUILDER_IMAGE }}-custom:${{ env.WILDFLY_IMAGE_VERSION }} behave --include-re stability > test-logs-stability-${{ matrix.os }}-${{ matrix.jdk }}.txt 2>&1
           rm test-logs-stability-${{ matrix.os }}-${{ matrix.jdk }}.txt
           popd
           docker system prune -f  
@@ -253,14 +253,14 @@ jobs:
         run: |
           . ~/cekit/bin/activate
           pushd wildfly-builder-image
-          cekit test --image=${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:${{ env.WILDFLY_IMAGE_VERSION }} behave --include-re vanilla-basic > test-logs-vanilla-basic-${{ matrix.os }}-${{ matrix.jdk }}.txt 2>&1
+          cekit test --image=${{ env.WILDFLY_S2I_BUILDER_IMAGE }}-custom:${{ env.WILDFLY_IMAGE_VERSION }} behave --include-re vanilla-basic > test-logs-vanilla-basic-${{ matrix.os }}-${{ matrix.jdk }}.txt 2>&1
           rm test-logs-vanilla-basic-${{ matrix.os }}-${{ matrix.jdk }}.txt
           popd
           docker system prune -f 
       - name: Additional Tests
         run: |
           export IMAGE_VERSION=${{ env.WILDFLY_IMAGE_VERSION }}
-          export IMAGE_NAME=${{ env.WILDFLY_S2I_BUILDER_IMAGE }}
+          export IMAGE_NAME=${{ env.WILDFLY_S2I_BUILDER_IMAGE }}-custom
           export RUNTIME_IMAGE_NAME=${{ env.WILDFLY_S2I_RUNTIME_IMAGE }}
           . ~/cekit/bin/activate
           ./test/run
