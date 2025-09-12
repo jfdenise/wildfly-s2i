@@ -1,0 +1,7 @@
+schema_version: 1
+name: jboss.container.wildfly.custom.settings
+version: 'staging'
+description: Custom settings
+
+execute:
+- script: configure.sh

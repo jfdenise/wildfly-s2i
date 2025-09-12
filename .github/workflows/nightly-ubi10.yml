@@ -115,11 +115,42 @@ jobs:
           docker image ls
           docker inspect ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:${{ env.WILDFLY_IMAGE_VERSION }}
           docker run --rm ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:${{ env.WILDFLY_IMAGE_VERSION }} bash
+      - uses: actions/checkout@v2
+        with:
+            repository: jfdenise/wildfly-cloud-galleon-pack
+            path: wildfly-cloud-galleon-pack
+            ref: ubi10
+      - name: Custom image with custom could fp
+        run: |
+          tmpPath=/tmp/custom-cloud-image
+          rm -rf $tmpPath
+          mkdir -p $tmpPath
+          mkdir -p $tmpPath/docker/
+          docker_file=$tmpPath/docker/Dockerfile
+          cd wildfly-cloud-galleon-pack
+          mvn clean install -DskipTests
+          cloudVersion=8.0.1.Alpha1
+          mkdir -p $tmpPath/docker/maven-repository/org/wildfly/cloud/wildfly-cloud-galleon-pack/$cloudVersion
+          cp wildfly-cloud-galleon-pack/target/wildfly-cloud-galleon-pack-$cloudVersion.zip $tmpPath/docker/maven-repository/org/wildfly/cloud/wildfly-cloud-galleon-pack/$cloudVersion
+          cat <<EOF > $docker_file
+          FROM ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:${{ env.WILDFLY_IMAGE_VERSION }}
+          RUN mkdir -p /tmp/artifacts/m2
+          COPY --chown=jboss:root maven-repository /maven-repository
+          EOF
+          podman build -t ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}-custom:${{ env.WILDFLY_IMAGE_VERSION }} $tmpPath/docker
+        working-directory: wildfly-cloud-galleon-pack
+      - name: List docker images again
+        run: |
+          docker --version
+          docker info
+          docker image ls
+          docker inspect ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}-custom:${{ env.WILDFLY_IMAGE_VERSION }}
+          docker run --rm ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}-custom:${{ env.WILDFLY_IMAGE_VERSION }} bash
       - name: Behave Tests basic
         run: |
           . ~/cekit/bin/activate
           pushd wildfly-builder-image
-          cekit test --image=${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:${{ env.WILDFLY_IMAGE_VERSION }} behave --include-re basic
+          cekit test --image=${{ env.WILDFLY_S2I_BUILDER_IMAGE }}-custom:${{ env.WILDFLY_IMAGE_VERSION }} behave --include-re basic
           popd
           docker system prune -f
       - name: Behave Tests datasources
