@@ -136,7 +136,7 @@ jobs:
           RUN mkdir -p /tmp/artifacts/m2
           COPY --chown=jboss:root maven-repository /maven-repository
           EOF
-          podman build -t ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}-custom:${{ env.WILDFLY_IMAGE_VERSION }} $tmpPath/docker
+          docker build -t ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}-custom:${{ env.WILDFLY_IMAGE_VERSION }} $tmpPath/docker
         working-directory: wildfly-cloud-galleon-pack
       - name: List docker images again
         run: |
