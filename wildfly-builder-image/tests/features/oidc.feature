@@ -5,7 +5,7 @@ Feature: OIDC tests
      Given XML namespaces
        | prefix | url                          |
        | ns     | urn:wildfly:elytron-oidc-client:2.0 |
-     Given s2i build http://github.com/wildfly/wildfly-s2i from test/test-app-elytron-oidc-client with env and True using main
+     Given s2i build https://github.com/jfdenise/wildfly-s2i from test/test-app-elytron-oidc-client with env and True using test-ubi10
        | variable               | value                                            |
        | OIDC_PROVIDER_NAME | keycloak |
        | OIDC_PROVIDER_URL           | http://localhost:8080/auth/realms/demo    |
@@ -21,10 +21,10 @@ Feature: OIDC tests
     And XML file /opt/server/standalone/configuration/standalone.xml should contain value http://localhost:8080/auth/realms/demo on XPath //*[local-name()='provider']/*[local-name()='provider-url']
 
   Scenario: Provision oidc subsystem configuration, legacy.
-     Given s2i build http://github.com/wildfly/wildfly-s2i from test/test-app-elytron-oidc-client-legacy with env and True using main
+     Given s2i build https://github.com/jfdenise/wildfly-s2i from test/test-app-elytron-oidc-client-legacy with env and True using test-ubi10
        | variable               | value                                            |
        | GALLEON_PROVISION_LAYERS | cloud-server,elytron-oidc-client |
-       | GALLEON_PROVISION_FEATURE_PACKS|org.wildfly:wildfly-galleon-pack:36.0.0.Final,org.wildfly.cloud:wildfly-cloud-galleon-pack:8.0.0.Final |
+       | GALLEON_PROVISION_FEATURE_PACKS|org.wildfly:wildfly-galleon-pack:36.0.0.Final,org.wildfly.cloud:wildfly-cloud-galleon-pack:8.0.1.Alpha1 |
   Scenario: Check oidc subsystem configuration, legacy.
      Given XML namespaces
        | prefix | url                          |

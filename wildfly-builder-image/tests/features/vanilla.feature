@@ -2,7 +2,7 @@
 Feature: Vanilla Wildfly basic tests
 
  Scenario: Check if image version and release is printed on boot
-   Given s2i build http://github.com/wildfly/wildfly-s2i from test/vanilla-wildfly/test-app with env and True using main
+   Given s2i build https://github.com/jfdenise/wildfly-s2i from test/vanilla-wildfly/test-app with env and True using test-ubi10
    | variable                             | value         |
    ### PLACEHOLDER FOR CLOUD CUSTOM TESTING ###
    Then container log should contain Running wildfly/wildfly-s2i
@@ -164,7 +164,7 @@ Scenario: Check if image shuts down with TERM signal
     And exactly 1 times container log should contain WFLYSRV0050
 
 Scenario: Test to ensure that maven is run with -Djava.net.preferIPv4Stack=true and user-supplied arguments, even when MAVEN_ARGS is overridden, and doesn't clear the local repository after the build
-    Given s2i build http://github.com/wildfly/wildfly-s2i from test/vanilla-wildfly/test-app with env and true using main
+    Given s2i build https://github.com/jfdenise/wildfly-s2i from test/vanilla-wildfly/test-app with env and true using test-ubi10
        | variable          | value                                                                                  |
        | MAVEN_ARGS        | -e -Dcom.redhat.xpaas.repo.jbossorg -DskipTests package -Popenshift |
        | MAVEN_ARGS_APPEND | -Dfoo=bar                                                                              |

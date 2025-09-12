@@ -2,7 +2,7 @@
 Feature: Wildfly Legacy s2i tests
 
   Scenario: Test provisioning.xml file
-    Given s2i build https://github.com/wildfly/wildfly-s2i from test/vanilla-wildfly/test-app-local-provisioning with env and True using main
+    Given s2i build https://github.com/jfdenise/wildfly-s2i from test/vanilla-wildfly/test-app-local-provisioning with env and True using test-ubi10
       | variable                             | value         |
       | GALLEON_USE_LOCAL_FILE             | true  |
     Then container log should contain WFLYSRV0025
@@ -17,7 +17,7 @@ Scenario: Test preconfigure.sh
       | variable                             | value         |
       | TEST_EXTENSION_PRE_ADD_PROPERTY      | foo           |
       | GALLEON_PROVISION_LAYERS | cloud-server |
-      | GALLEON_PROVISION_FEATURE_PACKS | org.wildfly:wildfly-galleon-pack:36.0.0.Final, org.wildfly.cloud:wildfly-cloud-galleon-pack:8.0.0.Final |
+      | GALLEON_PROVISION_FEATURE_PACKS | org.wildfly:wildfly-galleon-pack:36.0.0.Final, org.wildfly.cloud:wildfly-cloud-galleon-pack:8.0.1.Alpha1 |
     Then container log should contain WFLYSRV0025
     And container log should contain WFLYSRV0010: Deployed "ROOT.war"
     And check that page is served
@@ -33,12 +33,12 @@ Scenario: Test preconfigure.sh
     Given failing s2i build http://github.com/openshift/openshift-jee-sample from . using master
       | variable                             | value         |
       | GALLEON_PROVISION_LAYERS             | foo |
-      | GALLEON_PROVISION_FEATURE_PACKS | org.wildfly:wildfly-galleon-pack:36.0.0.Final, org.wildfly.cloud:wildfly-cloud-galleon-pack:8.0.0.Final |
+      | GALLEON_PROVISION_FEATURE_PACKS | org.wildfly:wildfly-galleon-pack:36.0.0.Final, org.wildfly.cloud:wildfly-cloud-galleon-pack:8.0.1.Alpha1 |
 
   Scenario: Test default cloud config
     Given s2i build https://github.com/wildfly/wildfly-s2i from test/test-app with env and True using legacy-s2i-images
       | variable                             | value         |
-      | GALLEON_PROVISION_FEATURE_PACKS | org.wildfly:wildfly-galleon-pack:36.0.0.Final, org.wildfly.cloud:wildfly-cloud-galleon-pack:8.0.0.Final |
+      | GALLEON_PROVISION_FEATURE_PACKS | org.wildfly:wildfly-galleon-pack:36.0.0.Final, org.wildfly.cloud:wildfly-cloud-galleon-pack:8.0.1.Alpha1 |
       | GALLEON_PROVISION_LAYERS | cloud-default-config |
     Then container log should contain WFLYSRV0025
     And container log should contain WFLYSRV0010: Deployed "ROOT.war"
@@ -51,7 +51,7 @@ Scenario: Test preconfigure.sh
   Scenario: Test cloud-server, exclude jaxrs
     Given s2i build https://github.com/wildfly/wildfly-s2i from test/test-app with env and True using legacy-s2i-images
       | variable                             | value         |
-      | GALLEON_PROVISION_FEATURE_PACKS | org.wildfly:wildfly-galleon-pack:36.0.0.Final, org.wildfly.cloud:wildfly-cloud-galleon-pack:8.0.0.Final |
+      | GALLEON_PROVISION_FEATURE_PACKS | org.wildfly:wildfly-galleon-pack:36.0.0.Final, org.wildfly.cloud:wildfly-cloud-galleon-pack:8.0.1.Alpha1 |
       | GALLEON_PROVISION_LAYERS             | cloud-server,-jaxrs  |
     Then container log should contain WFLYSRV0025
     And check that page is served
@@ -67,7 +67,7 @@ Scenario: Test external driver created during s2i.
       | variable                     | value                                                       |
       | ENV_FILES                    | /opt/server/standalone/configuration/datasources.env |
       | GALLEON_PROVISION_LAYERS             | cloud-server  |
-      | GALLEON_PROVISION_FEATURE_PACKS | org.wildfly:wildfly-galleon-pack:36.0.0.Final, org.wildfly.cloud:wildfly-cloud-galleon-pack:8.0.0.Final |
+      | GALLEON_PROVISION_FEATURE_PACKS | org.wildfly:wildfly-galleon-pack:36.0.0.Final, org.wildfly.cloud:wildfly-cloud-galleon-pack:8.0.1.Alpha1 |
   Then container log should contain WFLYSRV0025
     And check that page is served
       | property | value |
@@ -83,7 +83,7 @@ Scenario: Test external driver created during s2i.
       | ENV_FILES                    | /opt/server/standalone/configuration/datasources.env |
       | DISABLE_BOOT_SCRIPT_INVOKER  | true |
       | GALLEON_PROVISION_LAYERS             | cloud-server  |
-      | GALLEON_PROVISION_FEATURE_PACKS | org.wildfly:wildfly-galleon-pack:36.0.0.Final, org.wildfly.cloud:wildfly-cloud-galleon-pack:8.0.0.Final |
+      | GALLEON_PROVISION_FEATURE_PACKS | org.wildfly:wildfly-galleon-pack:36.0.0.Final, org.wildfly.cloud:wildfly-cloud-galleon-pack:8.0.1.Alpha1 |
    Then container log should contain Configuring the server using embedded server
     Then container log should contain WFLYSRV0025
     And check that page is served
@@ -98,7 +98,7 @@ Scenario: Test external driver created during s2i.
     Given s2i build https://github.com/wildfly/wildfly-s2i from test/test-app-binary with env and True using legacy-s2i-images
       | variable                             | value         |
       | GALLEON_PROVISION_LAYERS | jaxrs-server |
-      | GALLEON_PROVISION_FEATURE_PACKS | org.wildfly:wildfly-galleon-pack:36.0.0.Final, org.wildfly.cloud:wildfly-cloud-galleon-pack:8.0.0.Final |
+      | GALLEON_PROVISION_FEATURE_PACKS | org.wildfly:wildfly-galleon-pack:36.0.0.Final, org.wildfly.cloud:wildfly-cloud-galleon-pack:8.0.1.Alpha1 |
     Then container log should contain WFLYSRV0025
     And container log should contain WFLYSRV0010: Deployed "app.war"
     And check that page is served
@@ -112,7 +112,7 @@ Scenario: Test external driver created during s2i.
    | variable                 | value           |
    | MAVEN_S2I_ARTIFACT_DIRS | app1/target,app2/target |
    | GALLEON_PROVISION_LAYERS | cloud-server |
-   | GALLEON_PROVISION_FEATURE_PACKS | org.wildfly:wildfly-galleon-pack:36.0.0.Final, org.wildfly.cloud:wildfly-cloud-galleon-pack:8.0.0.Final |
+   | GALLEON_PROVISION_FEATURE_PACKS | org.wildfly:wildfly-galleon-pack:36.0.0.Final, org.wildfly.cloud:wildfly-cloud-galleon-pack:8.0.1.Alpha1 |
    ### PLACEHOLDER FOR CLOUD CUSTOM TESTING ###
    Then container log should contain WFLYSRV0010: Deployed "App1.war"
    Then container log should contain WFLYSRV0010: Deployed "App2.war"

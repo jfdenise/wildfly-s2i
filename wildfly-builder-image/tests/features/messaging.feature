@@ -5,7 +5,7 @@ Scenario: Configure amq7 remote broker
     Given s2i build https://github.com/wildfly/wildfly-s2i from test/test-app with env and true using legacy-s2i-images
     | variable              | value                                   |
     | GALLEON_PROVISION_LAYERS             | cloud-server  |
-    | GALLEON_PROVISION_FEATURE_PACKS | org.wildfly:wildfly-galleon-pack:36.0.0.Final, org.wildfly.cloud:wildfly-cloud-galleon-pack:8.0.0.Final |
+    | GALLEON_PROVISION_FEATURE_PACKS | org.wildfly:wildfly-galleon-pack:36.0.0.Final, org.wildfly.cloud:wildfly-cloud-galleon-pack:8.0.1.Alpha1 |
     | MQ_SERVICE_PREFIX_MAPPING           | wf-app-amq7=TEST |
     | WF_APP_AMQ_TCP_SERVICE_HOST      | 127.0.0.1 |
     | WF_APP_AMQ_TCP_SERVICE_PORT       | 5678 |
@@ -56,7 +56,7 @@ Scenario: Configure amq7 remote broker
    Then container log should contain WFLYSRV0025
 
  Scenario: deploys the test-app-mdb app, then checks if it's deployed properly with Queues and Topics added
-    Given s2i build https://github.com/wildfly/wildfly-s2i from test/test-app-mdb using main
+    Given s2i build https://github.com/jfdenise/wildfly-s2i from test/test-app-mdb using test-ubi10
     | variable              | value                                   |
     |  MQ_TOPICS       |  HELLOWORLDMDBTopic   |
     | MQ_QUEUES      | HELLOWORLDMDBQueue |

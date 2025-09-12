@@ -5,7 +5,7 @@ Feature: Keycloak saml tests
      Given XML namespaces
        | prefix | url                          |
        | ns     | urn:jboss:domain:keycloak:1.4 |
-     Given s2i build http://github.com/wildfly/wildfly-s2i from test/test-app-keycloak-saml using main
+     Given s2i build https://github.com/jfdenise/wildfly-s2i from test/test-app-keycloak-saml using test-ubi10
        | variable                   | value                 |
 
    Scenario: Enable keycloak automatic registration.
