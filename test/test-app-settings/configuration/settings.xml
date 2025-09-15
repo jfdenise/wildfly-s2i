@@ -3,4 +3,27 @@
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
   <localRepository>${env.HOME}/.m2/foo-repository</localRepository>
+  <profiles>
+    <profile>
+      <id>wildfly-local-repository</id>
+      <repositories>
+        <repository>
+          <id>wildfly-local-repository</id>
+          <url>file:///maven-repository</url>
+        </repository>
+      </repositories>
+      <pluginRepositories>
+        <pluginRepository>
+          <id>wildfly-local-repository</id>
+          <url>file:///maven-repository</url>
+        </pluginRepository>
+      </pluginRepositories>
+    </profile>
+    <!-- ### configured profiles ### -->
+
+  </profiles>
+  <activeProfiles>
+    <activeProfile>wildfly-local-repository</activeProfile>
+    <!-- ### active profiles ### -->
+  </activeProfiles>
 </settings>
