@@ -12,6 +12,8 @@ env:
   # The image to copy in docker daemon for testing
   UBUNTU_ARCHITECTURE_IMAGE: linuxamd64
   BEHAVE_TIMEOUT: 60
+  # Workaround for podman vs docker version mismatch in latest ubuntu image
+  DOCKER_MIN_API_VERSION: 1.41
 jobs:
   wfci:
     name: Wildfly-s2i Build and Test
@@ -39,9 +41,6 @@ jobs:
           docker version
       - name: podman version
         run: |
-          podman version
-          sudo apt-get update
-          sudo apt-get -y install podman
           podman version
       - name: Verify latest ubi9-minimal
         run: |
@@ -97,16 +96,16 @@ jobs:
           platforms: linux/amd64
           containerfiles: |
             ./wildfly-builder-image/target/image/Dockerfile
-#      - name: Buildah multi archs Runtime Build
-#        id: build_runtime_image
-#        uses: redhat-actions/buildah-build@v2.10
-#        with:
-#          image: ${{ env.WILDFLY_S2I_RUNTIME_IMAGE }}
-#          tags: ${{ env.WILDFLY_IMAGE_VERSION }}
-#          context: ./wildfly-runtime-image/target/image
-#          platforms: linux/amd64, linux/arm64, linux/ppc64le
-#          containerfiles: |
-#            ./wildfly-runtime-image/target/image/Dockerfile
+      - name: Buildah multi archs Runtime Build
+        id: build_runtime_image
+        uses: redhat-actions/buildah-build@v2.10
+        with:
+          image: ${{ env.WILDFLY_S2I_RUNTIME_IMAGE }}
+          tags: ${{ env.WILDFLY_IMAGE_VERSION }}
+          context: ./wildfly-runtime-image/target/image
+          platforms: linux/amd64
+          containerfiles: |
+            ./wildfly-runtime-image/target/image/Dockerfile
       - name: podman copy Builder and Runtime images to Docker local repo for tests
         run: |
           docker --version
