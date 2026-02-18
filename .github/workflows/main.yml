@@ -37,6 +37,12 @@ jobs:
       - name: Docker version
         run: |
           docker version
+      - name: podman version
+        run: |
+          podman version
+          sudo apt-get update
+          sudo apt-get -y install podman
+          podman version
       - name: Verify latest ubi9-minimal
         run: |
           podman pull registry.access.redhat.com/ubi9/ubi-minimal:9.7-1770267347
