@@ -91,24 +91,24 @@ jobs:
           platforms: linux/amd64, linux/arm64, linux/ppc64le
           containerfiles: |
             ./wildfly-builder-image/target/image/Dockerfile
-      - name: Buildah multi archs Runtime Build
-        id: build_runtime_image
-        uses: redhat-actions/buildah-build@v2.10
-        with:
-          image: ${{ env.WILDFLY_S2I_RUNTIME_IMAGE }}
-          tags: ${{ env.WILDFLY_IMAGE_VERSION }}
-          context: ./wildfly-runtime-image/target/image
-          platforms: linux/amd64, linux/arm64, linux/ppc64le
-          containerfiles: |
-            ./wildfly-runtime-image/target/image/Dockerfile
+#      - name: Buildah multi archs Runtime Build
+#        id: build_runtime_image
+#        uses: redhat-actions/buildah-build@v2.10
+#        with:
+#          image: ${{ env.WILDFLY_S2I_RUNTIME_IMAGE }}
+#          tags: ${{ env.WILDFLY_IMAGE_VERSION }}
+#          context: ./wildfly-runtime-image/target/image
+#          platforms: linux/amd64, linux/arm64, linux/ppc64le
+#          containerfiles: |
+#            ./wildfly-runtime-image/target/image/Dockerfile
       - name: podman copy Builder and Runtime images to Docker local repo for tests
         run: |
           podman --version
           podman images
           echo "PUSHING 1"
-          podman push ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:${{ env.WILDFLY_IMAGE_VERSION }}-${{ env.UBUNTU_ARCHITECTURE_IMAGE }} docker-daemon:${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:${{ env.WILDFLY_IMAGE_VERSION }}
+          podman --log-level=debug push ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:${{ env.WILDFLY_IMAGE_VERSION }}-${{ env.UBUNTU_ARCHITECTURE_IMAGE }} docker-daemon:${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:${{ env.WILDFLY_IMAGE_VERSION }}
           echo "PUSHING 2"
-          podman push ${{ env.WILDFLY_S2I_RUNTIME_IMAGE }}:${{ env.WILDFLY_IMAGE_VERSION }}-${{ env.UBUNTU_ARCHITECTURE_IMAGE }} docker-daemon:${{ env.WILDFLY_S2I_RUNTIME_IMAGE }}:${{ env.WILDFLY_IMAGE_VERSION }}
+          podman --log-level=debug push ${{ env.WILDFLY_S2I_RUNTIME_IMAGE }}:${{ env.WILDFLY_IMAGE_VERSION }}-${{ env.UBUNTU_ARCHITECTURE_IMAGE }} docker-daemon:${{ env.WILDFLY_S2I_RUNTIME_IMAGE }}:${{ env.WILDFLY_IMAGE_VERSION }}
           echo "PUSHING 3"
       - name: List docker images
         run: |
