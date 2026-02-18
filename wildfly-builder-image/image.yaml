@@ -1,7 +1,7 @@
 schema_version: 1
 
 name: &imgName "wildfly/wildfly-s2i"
-from: "registry.access.redhat.com/ubi9/ubi-minimal"
+from: "registry.access.redhat.com/ubi9/ubi-minimal:9.7-1770267347"
 version: "unknown"
 labels:
     - name: name

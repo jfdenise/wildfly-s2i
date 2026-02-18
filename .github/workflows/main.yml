@@ -39,7 +39,7 @@ jobs:
           docker version
       - name: Verify latest ubi9-minimal
         run: |
-          podman pull registry.access.redhat.com/ubi9/ubi-minimal
+          podman pull registry.access.redhat.com/ubi9/ubi-minimal:9.7-1770267347
           podman image ls | grep ubi9
       - name: Install qemu dependency
         run: |
