@@ -71,7 +71,7 @@ jobs:
            which s2i
            s2i version
 # Issue https://github.com/wildfly/wildfly-s2i/issues/522
-# We should re-enable when  podman dockaer client and docker doaemon are back to compatibility.
+# We should re-enable when  podman docker client and docker doaemon are back to compatibility.
 #      - name: Build DockerFiles
 #        run: |
 #          . ~/cekit/bin/activate
@@ -108,7 +108,7 @@ jobs:
 #          podman images
 #          podman push ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:${{ env.WILDFLY_IMAGE_VERSION }}-${{ env.UBUNTU_ARCHITECTURE_IMAGE }} docker-daemon:${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:${{ env.WILDFLY_IMAGE_VERSION }}
 #          podman push ${{ env.WILDFLY_S2I_RUNTIME_IMAGE }}:${{ env.WILDFLY_IMAGE_VERSION }}-${{ env.UBUNTU_ARCHITECTURE_IMAGE }} docker-daemon:${{ env.WILDFLY_S2I_RUNTIME_IMAGE }}:${{ env.WILDFLY_IMAGE_VERSION }}
-       - name: Build images
+      - name: Build images
         run: |
           . ~/cekit/bin/activate
           pushd wildfly-builder-image
