@@ -1,4 +1,4 @@
-This project defines Images allowing you to build and deploy WildFly applications on the cloud.
+DO NOT MERGEThis project defines Images allowing you to build and deploy WildFly applications on the cloud.
 
 Documentation for WildFly S2I (Source to Image) and runtime images can be found [there](https://docs.wildfly.org/wildfly-s2i/).
 
