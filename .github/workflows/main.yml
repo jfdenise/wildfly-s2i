@@ -114,11 +114,11 @@ jobs:
           pushd wildfly-builder-image
           WILDFLY_IMAGE_VERSION=$(yq e ".version" ${{ matrix.jdk }}-overrides.yaml)
           # Due to https://github.com/cekit/cekit/issues/955, we can't squash
-          cekit build --overrides=${{ matrix.jdk }}-overrides.yaml docker --no-squash
+          cekit -v build --overrides=${{ matrix.jdk }}-overrides.yaml docker
           popd
           pushd wildfly-runtime-image
           # Due to https://github.com/cekit/cekit/issues/955, we can't squash
-          cekit build --overrides=${{ matrix.jdk }}-overrides.yaml docker --no-squash
+          cekit -v build --overrides=${{ matrix.jdk }}-overrides.yaml docker
           popd
           echo "WILDFLY_IMAGE_VERSION=${WILDFLY_IMAGE_VERSION}" >> $GITHUB_ENV
       - name: List docker images
