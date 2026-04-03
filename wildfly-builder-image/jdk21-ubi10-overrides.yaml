@@ -16,8 +16,8 @@ modules:
       repositories:
           - name: openjdk
             git:
-              url: https://github.com/rh-openjdk/redhat-openjdk-containers
-              ref: ubi10
+              url: https://github.com/jfdenise/openjdk
+              ref: ubi10-overrides
       install:
           - name: jboss.container.openjdk.jdk
             version: "21"
