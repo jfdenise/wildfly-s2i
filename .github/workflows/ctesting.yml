@@ -166,6 +166,7 @@ jobs:
         run: |
           . ~/cekit/bin/activate
           pushd wildfly-builder-image
+          docker pull quay.io/${{ secrets.V2_QUAY_REPO }}/${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:latest-${{ matrix.jdk }}
           cekit test --image=quay.io/${{ secrets.V2_QUAY_REPO }}/${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:latest-${{ matrix.jdk }} behave --include-re basic > test-logs-basic-${{ matrix.os }}-${{ matrix.jdk }}.txt 2>&1
           rm test-logs-basic-${{ matrix.os }}-${{ matrix.jdk }}.txt
           popd
@@ -228,6 +229,7 @@ jobs:
         run: |
           . ~/cekit/bin/activate
           pushd wildfly-builder-image
+          docker pull quay.io/${{ secrets.V2_QUAY_REPO }}/${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:latest-${{ matrix.jdk }}
           cekit test --image=quay.io/${{ secrets.V2_QUAY_REPO }}/${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:latest-${{ matrix.jdk }} behave --include-re datasources > test-logs-datasources-${{ matrix.os }}-${{ matrix.jdk }}.txt 2>&1
           rm test-logs-datasources-${{ matrix.os }}-${{ matrix.jdk }}.txt
           popd
@@ -290,6 +292,7 @@ jobs:
         run: |
           . ~/cekit/bin/activate
           pushd wildfly-builder-image
+          docker pull quay.io/${{ secrets.V2_QUAY_REPO }}/${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:latest-${{ matrix.jdk }}
           cekit test --image=quay.io/${{ secrets.V2_QUAY_REPO }}/${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:latest-${{ matrix.jdk }} behave --include-re extensions > test-logs-extensions-${{ matrix.os }}-${{ matrix.jdk }}.txt 2>&1
           rm test-logs-extensions-${{ matrix.os }}-${{ matrix.jdk }}.txt
           popd
@@ -352,6 +355,7 @@ jobs:
         run: |
           . ~/cekit/bin/activate
           pushd wildfly-builder-image
+          docker pull quay.io/${{ secrets.V2_QUAY_REPO }}/${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:latest-${{ matrix.jdk }}
           cekit test --image=quay.io/${{ secrets.V2_QUAY_REPO }}/${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:latest-${{ matrix.jdk }} behave --include-re jgroups > test-logs-jgroups-${{ matrix.os }}-${{ matrix.jdk }}.txt 2>&1
           rm test-logs-jgroups-${{ matrix.os }}-${{ matrix.jdk }}.txt
           popd
@@ -414,6 +418,7 @@ jobs:
         run: |
           . ~/cekit/bin/activate
           pushd wildfly-builder-image
+          docker pull quay.io/${{ secrets.V2_QUAY_REPO }}/${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:latest-${{ matrix.jdk }}
           cekit test --image=quay.io/${{ secrets.V2_QUAY_REPO }}/${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:latest-${{ matrix.jdk }} behave --include-re keycloak > test-logs-keycloak-${{ matrix.os }}-${{ matrix.jdk }}.txt 2>&1
           rm test-logs-keycloak-${{ matrix.os }}-${{ matrix.jdk }}.txt
           popd
@@ -476,6 +481,7 @@ jobs:
         run: |
           . ~/cekit/bin/activate
           pushd wildfly-builder-image
+          docker pull quay.io/${{ secrets.V2_QUAY_REPO }}/${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:latest-${{ matrix.jdk }}
           cekit test --image=quay.io/${{ secrets.V2_QUAY_REPO }}/${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:latest-${{ matrix.jdk }} behave --include-re legacy-elytron > test-logs-legacy-elytron-${{ matrix.os }}-${{ matrix.jdk }}.txt 2>&1
           rm test-logs-legacy-elytron-${{ matrix.os }}-${{ matrix.jdk }}.txt
           popd
@@ -538,6 +544,7 @@ jobs:
         run: |
           . ~/cekit/bin/activate
           pushd wildfly-builder-image
+          docker pull quay.io/${{ secrets.V2_QUAY_REPO }}/${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:latest-${{ matrix.jdk }}
           cekit test --image=quay.io/${{ secrets.V2_QUAY_REPO }}/${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:latest-${{ matrix.jdk }} behave --include-re legacy-s2i > test-logs-legacy-s2i-${{ matrix.os }}-${{ matrix.jdk }}.txt 2>&1
           rm test-logs-legacy-s2i-${{ matrix.os }}-${{ matrix.jdk }}.txt
           popd
@@ -600,6 +607,7 @@ jobs:
         run: |
           . ~/cekit/bin/activate
           pushd wildfly-builder-image
+          docker pull quay.io/${{ secrets.V2_QUAY_REPO }}/${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:latest-${{ matrix.jdk }}
           cekit test --image=quay.io/${{ secrets.V2_QUAY_REPO }}/${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:latest-${{ matrix.jdk }} behave --include-re messaging > test-logs-messaging-${{ matrix.os }}-${{ matrix.jdk }}.txt 2>&1
           rm test-logs-messaging-${{ matrix.os }}-${{ matrix.jdk }}.txt
           popd
@@ -662,6 +670,7 @@ jobs:
         run: |
           . ~/cekit/bin/activate
           pushd wildfly-builder-image
+          docker pull quay.io/${{ secrets.V2_QUAY_REPO }}/${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:latest-${{ matrix.jdk }}
           cekit test --image=quay.io/${{ secrets.V2_QUAY_REPO }}/${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:latest-${{ matrix.jdk }} behave --include-re oidc > test-logs-oidc-${{ matrix.os }}-${{ matrix.jdk }}.txt 2>&1
           rm test-logs-oidc-${{ matrix.os }}-${{ matrix.jdk }}.txt
           popd
@@ -724,6 +733,7 @@ jobs:
         run: |
           . ~/cekit/bin/activate
           pushd wildfly-builder-image
+          docker pull quay.io/${{ secrets.V2_QUAY_REPO }}/${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:latest-${{ matrix.jdk }}
           cekit test --image=quay.io/${{ secrets.V2_QUAY_REPO }}/${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:latest-${{ matrix.jdk }} behave --include-re s2i-tests > test-logs-s2i-tests-${{ matrix.os }}-${{ matrix.jdk }}.txt 2>&1
           rm test-logs-s2i-tests-${{ matrix.os }}-${{ matrix.jdk }}.txt
           popd
@@ -786,6 +796,7 @@ jobs:
         run: |
           . ~/cekit/bin/activate
           pushd wildfly-builder-image
+          docker pull quay.io/${{ secrets.V2_QUAY_REPO }}/${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:latest-${{ matrix.jdk }}
           cekit test --image=quay.io/${{ secrets.V2_QUAY_REPO }}/${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:latest-${{ matrix.jdk }} behave --include-re server_builder > test-logs-server_builder-${{ matrix.os }}-${{ matrix.jdk }}.txt 2>&1
           rm test-logs-server_builder-${{ matrix.os }}-${{ matrix.jdk }}.txt
           popd
@@ -848,6 +859,7 @@ jobs:
         run: |
           . ~/cekit/bin/activate
           pushd wildfly-builder-image
+          docker pull quay.io/${{ secrets.V2_QUAY_REPO }}/${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:latest-${{ matrix.jdk }}
           cekit test --image=quay.io/${{ secrets.V2_QUAY_REPO }}/${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:latest-${{ matrix.jdk }} behave --include-re stability > test-logs-stability-${{ matrix.os }}-${{ matrix.jdk }}.txt 2>&1
           rm test-logs-stability-${{ matrix.os }}-${{ matrix.jdk }}.txt
           popd
@@ -910,6 +922,7 @@ jobs:
         run: |
           . ~/cekit/bin/activate
           pushd wildfly-builder-image
+          docker pull quay.io/${{ secrets.V2_QUAY_REPO }}/${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:latest-${{ matrix.jdk }}
           cekit test --image=quay.io/${{ secrets.V2_QUAY_REPO }}/${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:latest-${{ matrix.jdk }} behave --include-re vanilla-basic > test-logs-vanilla-basic-${{ matrix.os }}-${{ matrix.jdk }}.txt 2>&1
           rm test-logs-vanilla-basic-${{ matrix.os }}-${{ matrix.jdk }}.txt
           popd
@@ -970,6 +983,8 @@ jobs:
            s2i version
       - name: Additional Tests
         run: |
+          docker pull quay.io/${{ secrets.V2_QUAY_REPO }}/${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:latest-${{ matrix.jdk }}
+          docker pull quay.io/${{ secrets.V2_QUAY_REPO }}/${{ env.WILDFLY_S2I_RUNTIME_IMAGE }}:latest-${{ matrix.jdk }}
           export IMAGE_VERSION==latest-${{ matrix.jdk }}
           export IMAGE_NAME=quay.io/${{ secrets.V2_QUAY_REPO }}/${{ env.WILDFLY_S2I_BUILDER_IMAGE }}
           export RUNTIME_IMAGE_NAME=quay.io/${{ secrets.V2_QUAY_REPO }}/${{ env.WILDFLY_S2I_RUNTIME_IMAGE }}
