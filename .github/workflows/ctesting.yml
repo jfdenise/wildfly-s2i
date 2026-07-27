@@ -220,8 +220,71 @@ jobs:
           . ~/cekit/bin/activate
           pushd wildfly-builder-image
           docker pull ${{ env.QUAY_WILDFLY_S2I_BUILDER_IMAGE }}:latest-${{ matrix.jdk }}-${{ env.IMAGE_ID }}
-          cekit test --image=${{ env.QUAY_WILDFLY_S2I_BUILDER_IMAGE }}:latest-${{ matrix.jdk }}-${{ env.IMAGE_ID }} behave --include-re basic > test-logs-basic-${{ matrix.os }}-${{ matrix.jdk }}.txt 2>&1
-          rm test-logs-basic-${{ matrix.os }}-${{ matrix.jdk }}.txt
+          cekit test --image=${{ env.QUAY_WILDFLY_S2I_BUILDER_IMAGE }}:latest-${{ matrix.jdk }}-${{ env.IMAGE_ID }} behave --include-re 1-basic > test-logs-1-basic-${{ matrix.os }}-${{ matrix.jdk }}.txt 2>&1
+          rm test-logs-1-basic-${{ matrix.os }}-${{ matrix.jdk }}.txt
+          popd
+          docker system prune -f
+      - name: Advertise Failing Behave Scenarios
+        if: failure()
+        run: |
+          pushd wildfly-builder-image
+          logFile=$(find . -type f -iname "test-logs-*.txt")
+          if [ -f "${logFile}" ]; then
+            # Remove tar noise
+            grep -v "tar.go:" ${logFile} > tmpFile && mv tmpFile ${logFile}
+            # Display failing scenario
+            grep -A10000 "Errored scenarios" ${logFile}
+          else
+            echo "No failure in behave tests"
+          fi
+          popd
+      - name: Upload Test Reports on Failure
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: wildfly-s2i-test-logs-${{ matrix.os }}-${{ matrix.jdk }}
+          path: |
+           wildfly-builder-image/test-logs-*.txt
+           /tmp/*.wfs2i.log
+  basic2_test:
+    name: basic tests 2
+    runs-on: ${{ matrix.os }}
+    needs: build_builder_image
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        jdk: [jdk21, jdk25]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Python 3.x
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.11.5'
+      - name: Setup virtualenv and install cekit and required packages
+        run: |
+          python --version
+          sudo pip install virtualenv
+          mkdir ~/cekit
+          python3 -m venv ~/cekit
+          . ~/cekit/bin/activate
+          pip install cekit docker docker-squash odcs behave lxml packaging
+      - name: install s2i binary
+        run: |
+          echo ===== Installing s2i from ${{ env.S2I_URL }} =====
+          mkdir /tmp/s2i/ && cd /tmp/s2i/
+          wget ${{ env.S2I_URI }}
+           tar xvf source-to-image*.gz
+           sudo mv s2i /usr/bin
+           which s2i
+           s2i version
+      - name: Behave Tests basic 2
+        run: |
+          . ~/cekit/bin/activate
+          pushd wildfly-builder-image
+          docker pull ${{ env.QUAY_WILDFLY_S2I_BUILDER_IMAGE }}:latest-${{ matrix.jdk }}-${{ env.IMAGE_ID }}
+          cekit test --image=${{ env.QUAY_WILDFLY_S2I_BUILDER_IMAGE }}:latest-${{ matrix.jdk }}-${{ env.IMAGE_ID }} behave --include-re 2-basic > test-logs-2-basic-${{ matrix.os }}-${{ matrix.jdk }}.txt 2>&1
+          rm test-logs-2-basic-${{ matrix.os }}-${{ matrix.jdk }}.txt
           popd
           docker system prune -f
       - name: Advertise Failing Behave Scenarios
@@ -1046,7 +1109,7 @@ jobs:
   remove_images:
     name: remove images
     runs-on: ${{ matrix.os }}
-    needs: [build_builder_image, build_runtime_image,additional_test,vanilla_test,stability_test,server_builder_test,s2i_test,oidc_test,messaging_test,legacy_s2i_test,legacy_elytron_test,keycloak_test,jgroups_test,extensions_test,datasource_test,basic_test]
+    needs: [build_builder_image, build_runtime_image,additional_test,vanilla_test,stability_test,server_builder_test,s2i_test,oidc_test,messaging_test,legacy_s2i_test,legacy_elytron_test,keycloak_test,jgroups_test,extensions_test,datasource_test,basic_test,basic2_test]
     strategy:
       fail-fast: false
       matrix:
