@@ -202,7 +202,7 @@ jobs:
           python-version: '3.11.5'
       - uses: actions/download-artifact@v8
         with:
-          name: ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}_${{ env.QUAY_IMAGE_VERSION }}
+          name: ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}_latest-${{ matrix.jdk }}-${{ env.IMAGE_ID }}
           path: .
       - name: load docker image
         shell: bash
