@@ -1136,7 +1136,7 @@ jobs:
         run: |
           . ~/cekit/bin/activate
           pushd wildfly-builder-image
-          cekit test --image=${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:latest-${{ matrix.jdk }} behave --include-re vanilla-basic > test-logs-vanilla-basic-${{ matrix.os }}-${{ matrix.jdk }}.txt 2>&1
+          cekit test --image=${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:latest-${{ matrix.jdk }} behave --include-re vanilla > test-logs-vanilla-basic-${{ matrix.os }}-${{ matrix.jdk }}.txt 2>&1
           rm test-logs-vanilla-basic-${{ matrix.os }}-${{ matrix.jdk }}.txt
           popd
           docker system prune -f
