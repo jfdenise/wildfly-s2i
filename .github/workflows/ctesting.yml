@@ -87,7 +87,7 @@ jobs:
       - name: Upload docker image tar.gz
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}_${{ env.IMAGE_ID }}
+          name: ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}_latest-${{ matrix.jdk }}_${{ env.IMAGE_ID }}
           path: ./builder_image_latest.tar.gz
           retention-days: 1
   build_runtime_image:
@@ -165,7 +165,7 @@ jobs:
       - name: Upload docker image tar.gz
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.WILDFLY_S2I_RUNTIME_IMAGE }}_${{ env.IMAGE_ID }}
+          name: ${{ env.WILDFLY_S2I_RUNTIME_IMAGE }}_latest-${{ matrix.jdk }}_${{ env.IMAGE_ID }}
           path: ./runtime_image_latest.tar.gz
           retention-days: 1
   basic_test:
@@ -185,7 +185,7 @@ jobs:
           python-version: '3.11.5'
       - uses: actions/download-artifact@v8
         with:
-          name: ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}_${{ env.IMAGE_ID }}
+          name: ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}_latest-${{ matrix.jdk }}_${{ env.IMAGE_ID }}
           path: .
       - name: load docker image
         shell: bash
@@ -256,7 +256,7 @@ jobs:
           python-version: '3.11.5'
       - uses: actions/download-artifact@v8
         with:
-          name: ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}_${{ env.IMAGE_ID }}
+          name: ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}_latest-${{ matrix.jdk }}_${{ env.IMAGE_ID }}
           path: .
       - name: load docker image
         shell: bash
@@ -327,7 +327,7 @@ jobs:
           python-version: '3.11.5'
       - uses: actions/download-artifact@v8
         with:
-          name: ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}_${{ env.IMAGE_ID }}
+          name: ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}_latest-${{ matrix.jdk }}_${{ env.IMAGE_ID }}
           path: .
       - name: load docker image
         shell: bash
@@ -398,7 +398,7 @@ jobs:
           python-version: '3.11.5'
       - uses: actions/download-artifact@v8
         with:
-          name: ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}_${{ env.IMAGE_ID }}
+          name: ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}_latest-${{ matrix.jdk }}_${{ env.IMAGE_ID }}
           path: .
       - name: load docker image
         shell: bash
@@ -469,7 +469,7 @@ jobs:
           python-version: '3.11.5'
       - uses: actions/download-artifact@v8
         with:
-          name: ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}_${{ env.IMAGE_ID }}
+          name: ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}_latest-${{ matrix.jdk }}_${{ env.IMAGE_ID }}
           path: .
       - name: load docker image
         shell: bash
@@ -540,7 +540,7 @@ jobs:
           python-version: '3.11.5'
       - uses: actions/download-artifact@v8
         with:
-          name: ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}_${{ env.IMAGE_ID }}
+          name: ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}_latest-${{ matrix.jdk }}_${{ env.IMAGE_ID }}
           path: .
       - name: load docker image
         shell: bash
@@ -611,7 +611,7 @@ jobs:
           python-version: '3.11.5'
       - uses: actions/download-artifact@v8
         with:
-          name: ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}_${{ env.IMAGE_ID }}
+          name: ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}_latest-${{ matrix.jdk }}_${{ env.IMAGE_ID }}
           path: .
       - name: load docker image
         shell: bash
@@ -682,7 +682,7 @@ jobs:
           python-version: '3.11.5'
       - uses: actions/download-artifact@v8
         with:
-          name: ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}_${{ env.IMAGE_ID }}
+          name: ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}_latest-${{ matrix.jdk }}_${{ env.IMAGE_ID }}
           path: .
       - name: load docker image
         shell: bash
@@ -753,7 +753,7 @@ jobs:
           python-version: '3.11.5'
       - uses: actions/download-artifact@v8
         with:
-          name: ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}_${{ env.IMAGE_ID }}
+          name: ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}_latest-${{ matrix.jdk }}_${{ env.IMAGE_ID }}
           path: .
       - name: load docker image
         shell: bash
@@ -824,7 +824,7 @@ jobs:
           python-version: '3.11.5'
       - uses: actions/download-artifact@v8
         with:
-          name: ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}_${{ env.IMAGE_ID }}
+          name: ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}_latest-${{ matrix.jdk }}_${{ env.IMAGE_ID }}
           path: .
       - name: load docker image
         shell: bash
@@ -895,7 +895,7 @@ jobs:
           python-version: '3.11.5'
       - uses: actions/download-artifact@v8
         with:
-          name: ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}_${{ env.IMAGE_ID }}
+          name: ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}_latest-${{ matrix.jdk }}_${{ env.IMAGE_ID }}
           path: .
       - name: load docker image
         shell: bash
@@ -966,7 +966,7 @@ jobs:
           python-version: '3.11.5'
       - uses: actions/download-artifact@v8
         with:
-          name: ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}_${{ env.IMAGE_ID }}
+          name: ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}_latest-${{ matrix.jdk }}_${{ env.IMAGE_ID }}
           path: .
       - name: load docker image
         shell: bash
@@ -1037,7 +1037,7 @@ jobs:
           python-version: '3.11.5'
       - uses: actions/download-artifact@v8
         with:
-          name: ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}_${{ env.IMAGE_ID }}
+          name: ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}_latest-${{ matrix.jdk }}_${{ env.IMAGE_ID }}
           path: .
       - name: load docker image
         shell: bash
@@ -1108,7 +1108,7 @@ jobs:
           python-version: '3.11.5'
       - uses: actions/download-artifact@v8
         with:
-          name: ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}_${{ env.IMAGE_ID }}
+          name: ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}_latest-${{ matrix.jdk }}_${{ env.IMAGE_ID }}
           path: .
       - name: load docker image
         shell: bash
@@ -1179,7 +1179,7 @@ jobs:
           python-version: '3.11.5'
       - uses: actions/download-artifact@v8
         with:
-          name: ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}_${{ env.IMAGE_ID }}
+          name: ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}_latest-${{ matrix.jdk }}_${{ env.IMAGE_ID }}
           path: .
       - name: load builder docker image
         shell: bash
@@ -1188,7 +1188,7 @@ jobs:
          docker images
       - uses: actions/download-artifact@v8
         with:
-          name: ${{ env.WILDFLY_S2I_RUNTIME_IMAGE }}_${{ env.IMAGE_ID }}
+          name: ${{ env.WILDFLY_S2I_RUNTIME_IMAGE }}_latest-${{ matrix.jdk }}_${{ env.IMAGE_ID }}
           path: .
       - name: load runtime docker image
         shell: bash
