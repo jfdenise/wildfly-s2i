@@ -23,7 +23,8 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest]
-        jdk: [jdk21, jdk25]
+        #jdk: [jdk21, jdk25]
+        jdk: [jdk21]
     steps:
       - name: Update hosts - linux
         if: matrix.os == 'ubuntu-latest'
@@ -88,19 +89,20 @@ jobs:
           image: ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}
           tags: ${{ env.QUAY_IMAGE_VERSION }}
           context: ./wildfly-builder-image/target/image
-          platforms: linux/amd64, linux/arm64, linux/ppc64le
+          #platforms: linux/amd64, linux/arm64, linux/ppc64le
+          platforms: linux/amd64
           containerfiles: |
             ./wildfly-builder-image/target/image/Dockerfile
       - name: podman copy Builder image to Docker local repo for export
         run: |
-          podman push ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:${{ env.QUAY_IMAGE_VERSION }}-${{ env.UBUNTU_ARCHITECTURE_IMAGE }} docker-daemon:${{ env.WILDFLY_S2I_RUNTIME_IMAGE }}:${{ env.QUAY_IMAGE_VERSION }}
+          podman push ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:${{ env.QUAY_IMAGE_VERSION }}-${{ env.UBUNTU_ARCHITECTURE_IMAGE }} docker-daemon:${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:${{ env.QUAY_IMAGE_VERSION }}
           docker save ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}:${{ env.QUAY_IMAGE_VERSION }} | gzip > ./builder_image_latest.tar.gz
       - name: Upload docker image tar.gz
         uses: actions/upload-artifact@v4
         with:
           name: ${{ env.WILDFLY_S2I_BUILDER_IMAGE }}_${{ env.QUAY_IMAGE_VERSION }}
           path: ./builder_image_latest.tar.gz
-          retention-days: 5
+          retention-days: 1
 #  build_runtime_image:
 #    name: Wildfly-s2i build runtime
 #    runs-on: ${{ matrix.os }}
